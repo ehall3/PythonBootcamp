@@ -1,8 +1,8 @@
 # exceptions_fileIO.py
 """Python Essentials: Exceptions and File Input/Output.
-<Name>
-<Class>
-<Date>
+Ellison Hall
+Math Clinic
+November 8, 2025
 """
 
 from random import choice
@@ -24,10 +24,28 @@ def arithmagic():
 
     step_1 = input("Enter a 3-digit number where the first and last "
                                            "digits differ by 2 or more: ")
+    if len(step_1) != 3:
+        raise ValueError("The input has to be a three digit number")
+    
+    if abs(int(step_1[2]) - int(step_1[0])) < 2:
+        raise ValueError("First and last digits must have a differnce greater than 2")
+
     step_2 = input("Enter the reverse of the first number, obtained "
                                               "by reading it backwards: ")
+    
+    if step_2[::-1] != step_1:
+        raise ValueError("The second number is not a reverse of the first")
+    
     step_3 = input("Enter the positive difference of these numbers: ")
+
+    if step_3 != abs(int(step_1) - int(step_1)):
+        raise Exception("The third number is not a positive difference of the first two numbers.")
+    
     step_4 = input("Enter the reverse of the previous result: ")
+
+    if step_4 != step_3[::-1]:
+        raise ValueError("The fourth number is not the reverse of the thrid number.")
+    
     print(str(step_3), "+", str(step_4), "= 1089 (ta-da!)")
 
 
@@ -41,16 +59,20 @@ def random_walk(max_iters=1e12):
 
     Return walk.
     """
-
     walk = 0
     directions = [1, -1]
-    for _ in range(int(max_iters)):
-        walk += choice(directions)
-    return walk
+    try:
+        for i in range(int(max_iters)):
+            walk += choice(directions)
+    except KeyboardInterrupt:
+        print(f"Process Interupted at iteration {i}")
+    else:
+        print("Process Completed")
+    return print(walk, i) 
 
 
 # Problems 3 and 4: Write a 'ContentFilter' class.
-class ContentFilter(object):
+class ContentFilter():
     """Class for reading in file
 
     Attributes:
@@ -58,11 +80,29 @@ class ContentFilter(object):
         contents (str): the contents of the file
 
     """
+
     # Problem 3
     def __init__(self, filename):
         """ Read from the specified file. If the filename is invalid, prompt
         the user until a valid filename is given.
         """
+        self.filename = filename
+
+        KeepTrying = True
+        while KeepTrying:
+            try: 
+                with open(filename, 'r') as myfile:
+                    self.contents = myfile.read()
+                    KeepTrying = False
+            except (FileNotFoundError, TypeError, OSError, ValueError, NameError) as e:
+                self.filename = input("Please input a valid filename: ")
+                myfile.close
+            else:
+             KeepTrying = False
+
+        with open(filename, 'r') as myfile:
+            self.contents = myfile.read()
+            self.filename = filename
 
  # Problem 4 ---------------------------------------------------------------
     def check_mode(self, mode):
@@ -101,3 +141,6 @@ class ContentFilter(object):
         Whitespace characters:  <The number of spaces, tabs, and newlines>
         Number of lines:        <The number of lines>
         """
+
+if __name__ == "__main__":
+    ContentFilter('out.txt')
