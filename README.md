@@ -84,7 +84,7 @@ Make sure the **Key type** is set to **Authentication Key**.
 
 Now, in your terminal run
 ```bash
-$ cat ~/.ssh/id_ecdsa.pub 
+$ cat ~/.ssh/id_ecdsa.pub
 ```
 Copy everything that's printed out and paste it into GitHub, then press the green **Add SSH key** button.
 Then, in your terminal, run
