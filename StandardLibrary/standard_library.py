@@ -1,8 +1,8 @@
 # standard_library.py
 """Python Essentials: The Standard Library.
-<Name>
-<Class>
-<Date>
+Ellison Hall
+Math Clinic 
+November 8, 2025
 """
 
 from math import sqrt
@@ -13,16 +13,47 @@ def prob1(L):
     """Return the minimum, maximum, and average of the entries of L
     (in that order, separated by a comma).
     """
+    return min(L), max(L), sum(L)/len(L)
     raise NotImplementedError("Problem 1 Incomplete")
 
+if __name__ == "__main__": 
+    print(prob1([1, 2, 3, 4, 5]))
 
 # Problem 2
 def prob2():
     """Determine which Python objects are mutable and which are immutable.
     Test integers, strings, lists, tuples, and sets. Print your results.
     """
+    inte = 5
+    stri = "strings"
+    lis = [1, 2, 2, 3 ,4 ,5]
+    tup = (1,2,3)
+    se ={1, 2, 2, 3, 4, 5}
+
+    """Assign new"""
+    inte1 = inte
+    stri1 = stri
+    lis1 = lis
+    tup1 = tup
+    se1 = se
+
+    """New Changes"""
+    inte1 += 1
+    stri1 += "!"
+    lis1.append(6)
+    se1.add(6)
+    
+    """If they are mutable"""
+    print("int mutable?", inte == inte1)
+    print("string mutable?", stri == stri1)
+    print("list mutable?", lis == lis1)
+    print("tuple mutable?", tup == tup1)
+    print("set mutable?", se == se1)
+    return ()
     raise NotImplementedError("Problem 2 Incomplete")
 
+if __name__ == "__main__": 
+    print(prob2())
 
 # Problem 3
 def hypot(a, b):
